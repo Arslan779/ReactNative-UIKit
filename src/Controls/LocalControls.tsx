@@ -38,16 +38,34 @@ function Controls(props: {showButton: Boolean}) {
                 ...(maxViewRemoteBtnContainer as object),
               }}>
                 {props.encounterData.userRole === "ROLE_DOCTOR" ?
-                <TouchableOpacity
-                  style={stylesForControls.patientCardStyle}
-                  onPress={() => {
-                    // props.setPatientCardModal(true);
-                  }}>
-                  <PatientCard color={'blue'} width={24} height={24} />
-                  <View style={stylesForControls.txtStyles}>
-                    <Text>{"Patient Card"}</Text>
-                  </View>
-              </TouchableOpacity> 
+              //   <TouchableOpacity
+              //     style={stylesForControls.patientCardStyle}
+              //     onPress={() => {
+              //       // props.setPatientCardModal(true);
+              //     }}>
+              //     <PatientCard color={'blue'} width={24} height={24} />
+              //     <View style={stylesForControls.txtStyles}>
+              //       <Text>{"Patient Card"}</Text>
+              //     </View>
+              // </TouchableOpacity> 
+              <CountDown
+                size={15}
+                style={{marginTop: 0, padding: 0}}
+                until={
+                  !props.encounterData.isLoadingChannelInfo && props.encounterData && props.encounterData.tokenInformation.appointmentDTO.endTime
+                    ? props.encounterData.appointmentTimeInSeconds
+                    : 0
+                }
+                digitStyle={{borderWidth: 0,
+                  padding: 0,
+                  margin: 0,
+                  width: 20,}}
+                digitTxtStyle={{color: "blue", fontWeight: '400', padding: 0, margin: 0 }}
+                separatorStyle={styles.sepStyles}
+                timeToShow={['H', 'M', 'S']}
+                timeLabels={{ m: null, s: null }}
+                showSeparator
+              />
               :
               <CountDown
                 size={15}
